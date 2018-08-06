@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import HistoryList from './HistoryList';
+import { fetchHistory } from '../../actions/';
+import { connect } from 'react-redux';
 
 class History extends Component {
+  componentWillMount() {
+    this.props.fetchHistory()
+  }
   render() {
+    console.log(this.props.history)
     return (
       <div>
         <div className="page-header">History</div>
@@ -27,4 +33,9 @@ class History extends Component {
   }
 }
 
-export default History;
+export default connect(
+  state => {
+    return { history: state.history };
+  },
+  {fetchHistory}
+)(History);

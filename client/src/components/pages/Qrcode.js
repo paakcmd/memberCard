@@ -8,7 +8,7 @@ class Qrcode extends Component {
       <div>
         <div className="page-header">My Qrcode</div>
         <div className="myqrcode">
-          <QRCode size="200" className="qrcode" value={this.props.auth.ref}/>
+          <QRCode size={200} className="qrcode" value={this.props.auth.ref}/>
           <div className="qrcode-ref">{this.props.auth.ref}</div>
           <div className="myqrcode-description">Have the marchant scan your QRcode to give you points or stamps</div>
         </div>

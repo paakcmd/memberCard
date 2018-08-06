@@ -3,12 +3,18 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const authRoutes = require('./routes/authRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
+const merchantRoutes = require('./routes/merchantRoutes');
 require('./models/Users');
+require('./models/Merchants');
+require('./models/Transactions');
 require('./services/passport');
+
 
 mongoose.connect(keys.mongoURI);
 
-const authRoutes = require('./routes/authRoutes');
+
 const app = express();
 
 app.use(
@@ -22,6 +28,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 authRoutes(app);
+transactionRoutes(app, mongoose);
+merchantRoutes(app, mongoose);
 
 
 

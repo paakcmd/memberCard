@@ -194,11 +194,11 @@ body {
   }
   .card span {
     color:white;
-    font-size:50px;
+    font-size:40px;
     z-index: 10;
     position: relative;
-    top:-80px;
-    left:20px;
+    top:-60px;
+    left:10px;
     text-align: left;
   }
   .history {

@@ -7,7 +7,7 @@ class Account extends Component {
       <div>
         <div className="page-header">Account</div>
         <div className="account">
-          <img className="account-profile-picture" src={this.props.auth.image_url} className="account-profile-picture"/>
+          <img alt="profileimg" className="account-profile-picture" src={this.props.auth.imageUrl} />
           <div className="account-display-name">{this.props.auth.name}</div>
           <a href="/api/logout"><button className="logout-button" >Logout</button></a>
         </div>
