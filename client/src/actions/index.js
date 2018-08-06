@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_HISTORY } from './constants';
+import { FETCH_USER, FETCH_HISTORIES, FETCH_CARDS } from './constants';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -8,5 +8,10 @@ export const fetchUser = () => async dispatch => {
 
 export const fetchHistory = () => async dispatch => {
   const res = await axios.get('/api/get/transaction');
-  dispatch({ type: FETCH_HISTORY, payload: res.data })
+  dispatch({ type: FETCH_HISTORIES , payload: res.data })
+}
+
+export const fetchCards = () => async dispatch => {
+  const res = await axios.get('/api/get/merchants');
+  dispatch({ type: FETCH_CARDS , payload: res.data })
 }
