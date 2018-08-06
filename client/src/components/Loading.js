@@ -1,8 +1,12 @@
 import React from 'react';
+import ReactLoading from 'react-loading';
 
 const Loading = () => {
   return (
-    <h1>loading</h1>
+    <div className="loading">
+
+    <ReactLoading type={'spin'} color={'black'} height={'20%'} width={'20%'} />
+    </div>
   )
 }
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Qrcode from './Qrcode';
+import Qrcode from './pages/Qrcode';
 import Footer from './Footer';
-import Account from './Account';
-import MyCards from './MyCards';
-import History from './History';
+import Account from './pages/Account';
+import MyCards from './pages/MyCards';
+import History from './pages/History';
 const Pages = () => {
   return (
     <BrowserRouter>
