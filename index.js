@@ -6,6 +6,8 @@ const passport = require('passport');
 const authRoutes = require('./routes/authRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const merchantRoutes = require('./routes/merchantRoutes');
+
+
 require('./models/Users');
 require('./models/Merchants');
 require('./models/Transactions');
@@ -16,6 +18,9 @@ mongoose.connect(keys.mongoURI);
 
 
 const app = express();
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.use(
   cookieSession({
@@ -28,11 +33,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 authRoutes(app);
-transactionRoutes(app, mongoose);
+transactionRoutes(app, mongoose, io);
 merchantRoutes(app, mongoose);
 
-
+io.on('connection', function(socket){
+  console.log('Socket connected, ready for realtime application');
+});
 
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+http.listen(PORT);

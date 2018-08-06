@@ -4,8 +4,7 @@ const { Schema } = mongoose;
 const merchantSchema = new Schema({
   brand: String,
   userId: String,
-  imageUrl: String,
-  brandId: { type: String, unique:true },
+  imageUrl: String
 
 });
 

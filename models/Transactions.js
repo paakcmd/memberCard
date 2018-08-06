@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const transcationSchema = new Schema({
   userId: String,
-  brandId: String,
+  brandId: { type: String, ref: 'merchants' },
   ref: String,
   points: Number,
   transactionRef: { type: String, unique: true },

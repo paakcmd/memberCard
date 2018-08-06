@@ -3,10 +3,13 @@ import HistoryList from './HistoryList';
 import { fetchHistory } from '../../actions/';
 import { connect } from 'react-redux';
 import Loading from '../Loading';
+import socketIOClient from 'socket.io-client';
 
 class History extends Component {
   componentWillMount() {
     this.props.fetchHistory();
+    const socket = socketIOClient('http://localhost:5000')
+    socket.on("transaction", data => this.props.fetchHistory());
   }
   renderContent() {
     switch (this.props.history) {

@@ -5,6 +5,7 @@ import Loading from './Loading';
 import Login from './Login';
 import Pages from './Pages';
 
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();

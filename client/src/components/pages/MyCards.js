@@ -3,10 +3,13 @@ import Card from './Card';
 import Loading from '../Loading';
 import { fetchCards } from '../../actions/';
 import { connect } from 'react-redux';
+import socketIOClient from 'socket.io-client';
 
 class MyCards extends Component {
   componentWillMount() {
     this.props.fetchCards();
+    const socket = socketIOClient('http://localhost:5000');
+    socket.on("transaction", data => this.props.fetchCards());
   }
 
   renderContent() {
