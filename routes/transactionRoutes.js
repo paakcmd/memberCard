@@ -9,7 +9,7 @@ function makeid(length) {
   return text;
 }
 
-module.exports = ( app, mongoose, io ) => {
+module.exports = (app, mongoose, io) => {
   const Transcation = mongoose.model('transcations');
   const User = mongoose.model('users');
   app.use(bodyParser.json());
@@ -22,19 +22,22 @@ module.exports = ( app, mongoose, io ) => {
       ref: req.body.ref,
       points: req.body.points,
       transactionRef: makeid(10)
-    }).save().then(transaction => {
-      io.emit('transaction', { data: 'update' })
-      res.send(transaction)
     })
-  })
+      .save()
+      .then(transaction => {
+        io.emit('transaction', { data: 'update' });
+        res.send(transaction);
+      });
+  });
 
   app.get('/api/get/transaction/', (req, res) => {
     User.findById(req.user).then(user => {
       Transcation.find({
         ref: user.ref
-      }).populate('brandId','brand').select("points _id time brand").then(result => res.send(result))
-    })
-  })
-
-
-}
+      })
+        .populate('brandId', 'brand')
+        .select('points _id time brand')
+        .then(result => res.send(result));
+    });
+  });
+};

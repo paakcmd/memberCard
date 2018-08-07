@@ -12,4 +12,11 @@ describe('cardReducer', () => {
       cardReducer({}, { type: FETCH_CARDS, payload: mockupcards })
     ).toEqual(mockupcards);
   });
+
+  it('return false when the data is empty ', () => {
+    const mockupcards = '';
+    expect(
+      cardReducer({}, { type: FETCH_CARDS, payload: mockupcards })
+    ).toEqual(false);
+  });
 });

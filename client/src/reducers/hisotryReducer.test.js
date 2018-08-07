@@ -12,4 +12,11 @@ describe('historyReducer', () => {
       historyReducer({}, { type: FETCH_HISTORIES, payload: mockupHistory })
     ).toEqual(mockupHistory);
   });
+
+  it('return false when the data is empty ', () => {
+    const mockupcards = '';
+    expect(
+      historyReducer({}, { type: FETCH_HISTORIES, payload: mockupcards })
+    ).toEqual(false);
+  });
 });

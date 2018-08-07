@@ -57,7 +57,7 @@ module.exports = (app, mongoose) => {
               }
             }
           });
-          
+
           res.send(finalResult);
         })
         .catch(err => res.send(err));

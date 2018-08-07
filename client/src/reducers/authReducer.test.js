@@ -12,4 +12,11 @@ describe('authReducer', () => {
       mockupUser
     );
   });
+
+  it('return false when the data is empty ', () => {
+    const mockupcards = '';
+    expect(authReducer({}, { type: FETCH_USER, payload: mockupcards })).toEqual(
+      false
+    );
+  });
 });

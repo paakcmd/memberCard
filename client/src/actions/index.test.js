@@ -1,48 +1,96 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import fetchMock from 'fetch-mock';
+import moxios from 'moxios';
+import axios from 'axios';
 import { fetchUser, fetchHistory, fetchCards } from './index';
 import { FETCH_USER, FETCH_HISTORIES, FETCH_CARDS } from './constants';
 
 const createMockStore = configureMockStore([thunk]);
-const store = createMockStore({ auth: null, history: null });
+const store = createMockStore({ auth: null, history: null, cards: null });
 
 describe('fetchUser', () => {
-  const mockResponse = { id: '1234' };
-  fetchMock.get('http://localhost:5000/api/current_user', mockResponse);
+  beforeEach(function() {
+    moxios.install();
+  });
 
-  it('creates an async action to fetch the user', () => {
-    const expectedActions = [{ payload: mockResponse.body, type: FETCH_USER }];
+  afterEach(function() {
+    moxios.uninstall();
+  });
+
+  it('creates FETCH_USER after successfuly fetching user', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: { id: 1234 }
+      });
+    });
+
+    const expectedActions = [{ type: FETCH_USER, payload: { id: 1234 } }];
 
     return store.dispatch(fetchUser()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-});
-
-describe('fetchCards', () => {
-  const mockResponse = [{ cards: '1234' }];
-  fetchMock.get('/api/get/merchants', mockResponse);
-
-  it('creates an async action to fetch the transctions', () => {
-    const expectedActions = [{ payload: mockResponse.body, type: FETCH_CARDS }];
-
-    return store.dispatch(fetchCards()).then(() => {
+      // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });
 
 describe('fetchHistory', () => {
-  const mockResponse = [{ transaction1: '1234' }];
-  fetchMock.get('/api/get/transaction', mockResponse);
+  beforeEach(function() {
+    moxios.install();
+  });
 
-  it('creates an async action to fetch the transctions', () => {
+  afterEach(function() {
+    moxios.uninstall();
+  });
+
+  it('creates FETCH_HISTORIES after successfuly fetching histories', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: { his: 1 }
+      });
+    });
+
     const expectedActions = [
-      { payload: mockResponse.body, type: FETCH_HISTORIES }
+      { payload: { id: 1234 }, type: 'FETCH_USER' },
+      { payload: { his: 1 }, type: 'FETCH_HISTORIES' }
     ];
 
     return store.dispatch(fetchHistory()).then(() => {
+      // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+});
+
+describe('fetchCards', () => {
+  beforeEach(function() {
+    moxios.install();
+  });
+
+  afterEach(function() {
+    moxios.uninstall();
+  });
+
+  it('creates FETCH_CARDS after successfuly fetching cards', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: { cards: 1 }
+      });
+    });
+
+    const expectedActions = [
+      { payload: { id: 1234 }, type: 'FETCH_USER' },
+      { payload: { his: 1 }, type: 'FETCH_HISTORIES' },
+      { payload: { cards: 1 }, type: 'FETCH_CARDS' }
+    ];
+
+    return store.dispatch(fetchCards()).then(() => {
+      // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
