@@ -30,10 +30,6 @@ class MyCards extends Component {
         <div className="page-header">My cards</div>
         <div className="mycards">
           {this.renderContent()}
-          <Card cardImgSrc="Images/fuku.jpg" brandName="Fuku Matcha" />
-          <Card cardImgSrc="Images/Chatime.jpg" brandName="Chatime" />
-          <Card cardImgSrc="Images/Koi.jpg" brandName="Koi The" />
-          <Card cardImgSrc="Images/ochaya-milktea-slider.jpg" brandName="Ochaya" />
         </div>
       </div>
 

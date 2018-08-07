@@ -36,9 +36,7 @@ authRoutes(app);
 transactionRoutes(app, mongoose, io);
 merchantRoutes(app, mongoose);
 
-io.on('connection', function(socket){
-  console.log('Socket connected, ready for realtime application');
-});
+io.on('connection', function(socket){});
 
 
 const PORT = process.env.PORT || 5000;

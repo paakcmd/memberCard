@@ -7,4 +7,4 @@ export default combineReducers({
   auth: authReducer,
   history: historyReducer,
   cards: cardReducer
-})
+});

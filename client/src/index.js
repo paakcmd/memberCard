@@ -9,7 +9,6 @@ import './index.css';
 import openSocket from 'socket.io-client';
 openSocket('http://localhost:5000');
 
-
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 render(
   <Provider store={createStoreWithMiddleware(reducer)}>
